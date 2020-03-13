@@ -5,9 +5,9 @@ const FactoryService = require('../service/factory.service');
 const accountRepository = new AccountRepository('0');
 const transactionRepository = new TransactionRepository('0');
 
-module.exports.getDataByUserId = (userId) => {
+module.exports.getDataByUserId = async (userId) => {
     console.log(`::: USER ID :::  ${userId}`);
-    return accountRepository.findByUserId(userId);
+    return await accountRepository.findByUserId(userId);
 };
 
 module.exports.createAccountTransaction = (transaction, accountId) => {
@@ -27,12 +27,14 @@ module.exports.getAllTransactions = async (accountId) => {
     return await transactionRepository.findByAccountId(accountId);
 };
 
-module.exports.getTransactionById = (transactionId) => {
+module.exports.getTransactionById = async (transactionId) => {
     console.log(`::: TRANSACTION ID ::: ${transactionId}`);
-    return transactionRepository.findById(transactionId);
+    transactionRepository.entityId = transactionId;
+    return await transactionRepository.findById();
 };
 
-module.exports.getBalanceById = (accountId) => {
+module.exports.getBalanceById = async (accountId) => {
     console.log(`::: ACCOUNT ID ::: ${accountId}`);
-    return accountRepository.findById(accountId).get().totalAmount;
+    accountRepository.entityId = accountId;
+    return await accountRepository.findBalanceById();
 };

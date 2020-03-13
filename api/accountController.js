@@ -39,7 +39,7 @@ router.get(`/transaction/:id`, async (req, res, next) => {
 });
 
 /* GET account balance listing. */
-router.get(`/balance/{id}`, async (req, res, next) => {
+router.get(`/balance/:id`, async (req, res, next) => {
   try {
     interceptor.response( res, 200, 'SUCCESS', await accountService.getBalanceById(req.params.id) );
   } catch (err) {

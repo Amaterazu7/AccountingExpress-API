@@ -7,12 +7,14 @@ class CrudRepository {
     constructor(entity, entityId) {
         this.entity = entity;
         this.entityId = entityId;
+        this.db = db;
+        this.configLoader = configLoader;
     }
 
     async findAll() {
         try {
-            const config = configLoader.getConfig();
-            const conn = await db.getDB(config);
+            const config = this.configLoader.getConfig();
+            const conn = await this.db.getDB(config);
             const sql = ` SELECT * FROM ${this.entity} ; `;
             let result = await conn.query(sql);
             console.log(result.rows);
