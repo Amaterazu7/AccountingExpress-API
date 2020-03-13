@@ -16,6 +16,6 @@ router.get(`/:userId`, async (req, res, next) => {
 router.post(`/`, async (req, res, next) => interceptor.response(res, 200, 'SUCCESS', await userService.saveUser(req.body)) );
 
 /* PUT user listing. */
-router.put(`/:userId`, async (req, res, next) => interceptor.response(res, 200, 'SUCCESS', await userService.updateUser(req.body)) );
+router.put(`/`, async (req, res, next) => interceptor.response(res, 200, 'SUCCESS', await userService.updateUser(req.body)) );
 
 module.exports = router;

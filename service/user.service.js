@@ -5,16 +5,18 @@ const userRepository = new UserRepository('0');
 
 module.exports.getAllUser = async () => await userRepository.findAll();
 
-module.exports.getUserById = async (userId) => await userRepository.findById(userId);
+module.exports.getUserById = async (userId) => {
+    userRepository.entityId = userId;
+    return await userRepository.findById();
+};
 
 module.exports.saveUser = async (body) => {
     const id = await userRepository.save(new User(body.name, body.surname, body.email));
-    return await userRepository.findById(id);
+    return await this.getUserById(id);
 };
 
 module.exports.updateUser = async (body) => {
-    const user = new User(body.name, body.surname, body.email);
-    user.modificationDate = new Date();
+    const user = new User(body.name, body.surname, body.email, body.id);
     await userRepository.update(user);
-    return await userRepository.findById(user.id);
+    return await this.getUserById(user.id);
 };

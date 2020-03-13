@@ -2,7 +2,6 @@ const CrudRepository = require('./crud.repository');
 const db = require('../config/db');
 const configLoader = require('../config/config-loader');
 
-
 module.exports = class TransactionRepository extends CrudRepository {
     constructor(entityId) {
         super('transaction', entityId);

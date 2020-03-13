@@ -1,13 +1,13 @@
 const BaseModel = require('./baseModel');
-const Util = require('../service/util.service');
+const uuid = require('uuid/v4');
+
 
 class User extends BaseModel {
-    constructor(name = null, surname = null, email = null, codeId = Util.randomCode(Util.min(), Util.max())) {
-        super();
+    constructor(name = null, surname = null, email = null, id = uuid()) {
+        super(id);
         this.name = name;
         this.surname = surname;
         this.email = email;
-        this.codeId = codeId;
     }
 }
 

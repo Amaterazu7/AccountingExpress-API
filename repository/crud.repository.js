@@ -14,7 +14,7 @@ class CrudRepository {
             const config = configLoader.getConfig();
             const conn = await db.getDB(config);
             const sql = ` SELECT * FROM ${this.entity} ; `;
-            let result = await conn.query(sql, );
+            let result = await conn.query(sql);
             console.log(result.rows);
 
             return { hi: result.rows };
@@ -44,7 +44,7 @@ class CrudRepository {
     };
 
     async update() {
-        return;
+        toBeImplemented();
     };
 }
 
