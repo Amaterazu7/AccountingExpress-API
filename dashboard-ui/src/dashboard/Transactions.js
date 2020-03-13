@@ -2,7 +2,7 @@ import React from 'react';
 import Link from '@material-ui/core/Link';
 import { makeStyles } from '@material-ui/core/styles';
 import Title from './Title';
-import TransactionsTable from "./component/transactionsTable";
+import TransactionsTable from "./component/TransactionsTable";
 
 function preventDefault(event) {
   event.preventDefault();
@@ -11,7 +11,7 @@ function preventDefault(event) {
 const useStyles = makeStyles(theme => ({
   seeMore: {
     marginTop: theme.spacing(3),
-  },
+  }
 }));
 
 export default function Transactions() {
