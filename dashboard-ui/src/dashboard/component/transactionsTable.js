@@ -18,6 +18,12 @@ import ListItemText from '@material-ui/core/ListItemText';
 import Slide from '@material-ui/core/Slide';
 import { makeStyles } from '@material-ui/core/styles';
 import OpenInBrowser from '@material-ui/icons/OpenInBrowser';
+import InboxIcon from '@material-ui/icons/MoveToInbox';
+import Home from '@material-ui/icons/Home';
+import AccessibilityNewSharp from '@material-ui/icons/AccessibilityNewSharp';
+import AddToHomeScreen from '@material-ui/icons/AddToHomeScreen';
+import AddToQueue from '@material-ui/icons/AddToQueue';
+import Traffic from '@material-ui/icons/Traffic';
 import axios from 'axios';
 
 const Transition = React.forwardRef(function Transition(props, ref) {
@@ -60,11 +66,11 @@ const ResponsiveDialog = (props) => {
                 <DialogContent dividers>
                     <DialogContentText id="alert-dialog-slide-description">
                         <ListItem>
-                            <ListItemIcon> </ListItemIcon>
+                            <ListItemIcon> <Home/> </ListItemIcon>
                             <ListItemText primary="Transaction ID:: " secondary={'#'+transaction.id}/>
                         </ListItem>
                         <ListItem>
-                            <ListItemIcon> </ListItemIcon>
+                            <ListItemIcon> <AccessibilityNewSharp/> </ListItemIcon>
                             <ListItemText primary="Amount:: "
                                           secondary={
                                               <CurrencyFormat value={transaction.amount} displayType={'text'}
@@ -72,24 +78,24 @@ const ResponsiveDialog = (props) => {
                                               }/>
                         </ListItem>
                         <ListItem>
-                            <ListItemIcon> </ListItemIcon>
+                            <ListItemIcon> <AddToHomeScreen/> </ListItemIcon>
                             <ListItemText primary="Transaction Creation Date:: "
                                           secondary={
                                               <Moment format="YYYY MMM MMMM HH:mm:ss">{transaction.create_date}</Moment>
                                               }/>
                         </ListItem>
                         <ListItem>
-                            <ListItemIcon> </ListItemIcon>
+                            <ListItemIcon> <AddToQueue/> </ListItemIcon>
                             <ListItemText primary="Transaction Status:: "
                                           secondary={statusMap.get( transaction.status )}/>
                         </ListItem>
                         <ListItem>
-                            <ListItemIcon> </ListItemIcon>
+                            <ListItemIcon> <Traffic/> </ListItemIcon>
                             <ListItemText primary="Transaction Type:: "
                                           secondary={paymentMap.get( transaction.type )}/>
                         </ListItem>
                         <ListItem>
-                            <ListItemIcon>  </ListItemIcon>
+                            <ListItemIcon> <InboxIcon /> </ListItemIcon>
                             <ListItemText primary={'Description:: '} secondary={transaction.description}/>
                         </ListItem>
                     </DialogContentText>
