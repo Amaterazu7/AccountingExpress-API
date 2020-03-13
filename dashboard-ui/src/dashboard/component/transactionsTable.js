@@ -6,29 +6,19 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import axios from "axios";
 
-// Generate Order Data
-function createData(id, createDate, amount, paymentMethod) {
-    return { id, createDate, amount, paymentMethod };
-}
-
-let txList = [];
-const rows = [];
 const accountId = '1';
 
-function getTransactionsFromApi() {
-    axios.get(`/accountingNotebook/api/transactions/${accountId}`)
-        .then(response => {
-            txList = response.data.data;
-            for (let i = 0; i > txList.length; i++) {
-                rows.push( createData(txList[i].id, txList[i].create_date, txList[i].amount, txList[i].type) );
-            }
-            console.log({ resultList: txList });
-        });
-}
-
 class TransactionsTable extends Component {
-    componentDidMount() {
-        getTransactionsFromApi();
+
+    state = { txList: [] };
+
+    getTransactionsFromApi = async () => {
+        let response = await axios.get(`/accountingNotebook/api/transactions/${accountId}`);
+        this.setState({txList: response.data.data});
+    };
+
+    async componentDidMount() {
+        await this.getTransactionsFromApi();
     }
 
     /** POPUP
@@ -47,30 +37,32 @@ class TransactionsTable extends Component {
      *
      * */
 
+    setState(state, callback) {
+        super.setState(state, callback);
+    }
+
     render() {
         return (
-            <React.Fragment>
                 <Table size="small">
                     <TableHead>
                         <TableRow>
                             <TableCell>ID</TableCell>
                             <TableCell>Creation Date</TableCell>
-                            <TableCell align="right">Sale Amount</TableCell>
+                            <TableCell>Transaction Amount</TableCell>
                             <TableCell>Payment Method</TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {rows.map(row => (
-                            <TableRow key={1}>
-                                <TableCell>{row.id}</TableCell>
-                                <TableCell>{row.createDate}</TableCell>
-                                <TableCell align="right">{row.amount}</TableCell>
-                                <TableCell>{row.paymentMethod}</TableCell>
+                        {this.state.txList.map(tx => (
+                            <TableRow key={tx.id}>
+                                <TableCell>{tx.id}</TableCell>
+                                <TableCell>{tx.create_date}</TableCell>
+                                <TableCell>{tx.amount}</TableCell>
+                                <TableCell>{tx.type}</TableCell>
                             </TableRow>
                         ))}
                     </TableBody>
                 </Table>
-            </React.Fragment>
         );
     }
 }
