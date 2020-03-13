@@ -1,15 +1,16 @@
 import React, { Component } from 'react';
+import Moment from 'react-moment';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
+
 import axios from "axios";
 
 const accountId = '1';
-
+const paymentMap = new Map().set(0, 'CREDIT').set(1, 'DEBIT');
 class TransactionsTable extends Component {
-
     state = { txList: [] };
 
     getTransactionsFromApi = async () => {
@@ -56,9 +57,11 @@ class TransactionsTable extends Component {
                         {this.state.txList.map(tx => (
                             <TableRow key={tx.id}>
                                 <TableCell>{tx.id}</TableCell>
-                                <TableCell>{tx.create_date}</TableCell>
+                                <TableCell>
+                                    <Moment format="YYYY MMM MMMM HH:mm:ss">{tx.create_date}</Moment>
+                                </TableCell>
                                 <TableCell>{tx.amount}</TableCell>
-                                <TableCell>{tx.type}</TableCell>
+                                <TableCell>{paymentMap.get(tx.type)}</TableCell>
                             </TableRow>
                         ))}
                     </TableBody>
