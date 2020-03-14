@@ -7,6 +7,20 @@ module.exports.max = () => 99999999999999;
 
 module.exports.randomCode = (min, max) => Math.round(Math.random() * (max - min) + min);
 
+module.exports.transaction = async (conn, type) => {
+    try {
+        let resolve = await conn.query(type);
+        console.log(`:: ${type} >> Okay! ::`);
+        return resolve;
+
+    } catch (err) {
+        console.log(`:: ERROR >> ${type} transaction.`, err);
+        throw err;
+
+    }
+};
+
+
 module.exports.handleWithLock = async (context, fn, res) => {
     try {
         await lock(context);

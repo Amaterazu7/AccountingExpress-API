@@ -19,14 +19,14 @@ class CrudRepository {
             let result = await conn.query(sql);
             console.log(result.rows);
 
-            return { hi: result.rows };
+            return result.rows;
 
         } catch (e) {
             throw new Error(e);
         }
     };
 
-    async save() {
+    async save(entity) {
         toBeImplemented();
     };
 
@@ -45,7 +45,7 @@ class CrudRepository {
         }
     };
 
-    async update() {
+    async update(entity) {
         toBeImplemented();
     };
 }

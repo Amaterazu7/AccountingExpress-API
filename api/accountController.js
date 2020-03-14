@@ -25,8 +25,16 @@ router.get(`/accountData/:userId`, async (req, res, next) => {
 
 /* POST account listing. */
 router.post(`/save/:accountId`, async (req, res, next) => {
-  const context = { id: req.params.accountId, description: `request(post) #${req.params.accountId}` };
-  await util.handleWithLock( context, await accountService.createAccountTransaction(req.body, req.params.accountId), res );
+  try {
+    const context = { id: req.params.accountId, description: `request(post) #${req.params.accountId}` };
+    await util.handleWithLock( context, await accountService.saveAccountTransaction(req.body, req.params.accountId), res );
+    interceptor.response( res, 200, 'SUCCESS', { info: 'The Transaction was persisted Successfully!' } );
+
+  } catch (err) {
+    interceptor.response( res, 500, 'FAIL', { errorMessage: err.message }, err );
+
+  }
+
 });
 
 /* GET transaction listing. */

@@ -1,6 +1,6 @@
 const TransactionType = require('./transactionType.service');
-const Transaction = require('../model/transaction/transaction');
-const status = require('../model/transaction/status');
+const Transaction = require('../model/transaction');
+const Mapper = require('../model/mapper');
 
 class DebitTransaction extends TransactionType {
     handlerTransaction(request, account) {
@@ -8,10 +8,10 @@ class DebitTransaction extends TransactionType {
 
         if ( this.checkBalance(request, account.totalAmount) ) {
             account.totalAmount = ( account.totalAmount + request.amount );
-            debitTransaction.status = ( status.REGISTERED );
+            debitTransaction.status = ( Mapper.status().get(1) );
             debitTransaction.description = ( "Debit Transaction created Successfully." );
         } else {
-            debitTransaction.status = ( status.FAILED );
+            debitTransaction.status = ( Mapper.status().get(2) );
             debitTransaction.description = ( "Could't create a Debit Transaction. The Balance shouldn't be zero." );
         }
 
@@ -27,4 +27,4 @@ class DebitTransaction extends TransactionType {
     }
 }
 
-module.exports = { DebitTransaction };
+module.exports = DebitTransaction;

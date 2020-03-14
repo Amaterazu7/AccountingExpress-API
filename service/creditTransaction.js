@@ -1,6 +1,6 @@
 const TransactionType = require('./transactionType.service');
-const Transaction = require('../model/transaction/transaction');
-const status = require('../model/transaction/status');
+const Transaction = require('../model/transaction');
+const Mapper = require('../model/mapper');
 
 class CreditTransaction extends TransactionType {
     handlerTransaction(request, account) {
@@ -8,10 +8,10 @@ class CreditTransaction extends TransactionType {
 
         if ( this.checkBalance(request, account.totalAmount) ) {
             account.totalAmount = ( account.totalAmount + request.amount );
-            creditTransaction.status = ( status.REGISTERED );
+            creditTransaction.status = ( Mapper.status().get(1) );
             creditTransaction.description = ( "Credit Transaction created Successfully." );
         } else {
-            creditTransaction.status = ( status.FAILED );
+            creditTransaction.status = ( Mapper.status().get(2) );
             creditTransaction.description = ( "Could't create a Credit Transaction." );
         }
 
@@ -23,8 +23,8 @@ class CreditTransaction extends TransactionType {
     };
 
     checkBalance(request, accountBalance) {
-        return ( request.amount()>0 );
+        return ( request.amount>0 );
     }
 }
 
-module.exports = { CreditTransaction };
+module.exports = CreditTransaction;
