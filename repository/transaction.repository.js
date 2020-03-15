@@ -10,7 +10,7 @@ module.exports = class TransactionRepository extends CrudRepository {
         try {
             const config = this.configLoader.getConfig();
             const conn = await this.db.getDB(config);
-            const sql = ` SELECT * FROM ${this.entity} WHERE account_user_id = $1 ; `;
+            const sql = ` SELECT * FROM ${this.entity} WHERE account_user_id = $1 ORDER BY create_date DESC ; `;
             let result = await conn.query(sql, [this.entityId]);
             console.log(result.rows);
 
