@@ -11,7 +11,7 @@ services:
       - '5432:5432'
 
   express:
-    build: .
+    build: ./
     container_name: express
     restart: always
     ports:
@@ -22,7 +22,7 @@ services:
       - postgresql:postgresql
 
   react:
-    build: ./dashboard-ui
+    build: ./dashboard-ui/
     container_name: react
     restart: always
     ports:
