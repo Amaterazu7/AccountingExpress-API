@@ -22,7 +22,7 @@ const loadConfig = () => {
         // env_config = config[alias];
         env_config = {
             DB_DATABASE: "postgres",
-            DB_HOST: "localhost",
+            DB_HOST: "postgresql", // this is for the link between "postgresql" and Express docker-compose
             DB_PASSWORD: "testAccount",
             DB_PORT: "5432",
             DB_USER: "postgres",
