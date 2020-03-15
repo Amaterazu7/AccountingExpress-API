@@ -22,7 +22,7 @@ const loadConfig = () => {
         // env_config = config[alias];
         env_config = {
             DB_DATABASE: "postgres",
-            DB_HOST: "127.0.0.1",
+            DB_HOST: "localhost",
             DB_PASSWORD: "testAccount",
             DB_PORT: "5432",
             DB_USER: "postgres",
