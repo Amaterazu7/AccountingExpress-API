@@ -34,6 +34,9 @@ Please first step, clone or download this project.
 
 `` docker-compose up -d ``
 
+And that start to run a postgresql container, the app on ExpressJS and the UI on React.
+You can run the script file to have some data on the database.  
+
 
 # Accounting Notebook API - Agile Engine Code Challenge:
 We are looking to build a money accounting system. The application should be a web service. It should not do any real “transactional” work, just emulate the financial transactions logic (debit and credit).
