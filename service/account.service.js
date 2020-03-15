@@ -13,7 +13,7 @@ module.exports.getDataByUserId = async (userId) => {
 module.exports.saveAccountTransaction = async (transaction, accountId) => {
     accountRepository.entityId = accountId;
     transactionRepository.entityId = accountId;
-    return accountRepository.persist(transaction, transactionRepository);
+    await accountRepository.persist(transaction, transactionRepository);
 };
 
 module.exports.getAllTransactions = async (accountId) => {
