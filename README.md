@@ -28,11 +28,11 @@ Please first step, clone or download this project.
 ### Running the APP with docker 
 * You can install docker & docker-compose and run this commands in order to create a docker images. So, you can run the application on a docker containers with the docker-compose file:
 
-`` docker-compose up ``
+`` docker-compose up --build ``
 
 * If you don't want to see any log on you terminal you can run this:
 
-`` docker-compose up -d ``
+`` docker-compose up --build -d ``
 
 And that start to run a postgresql container, the app on ExpressJS and the UI on React.
 You can run the script file to have some data on the database.  
